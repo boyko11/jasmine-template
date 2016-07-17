@@ -42,6 +42,13 @@ App.converters.RomanNumeralConverter = (function() {
 
 		return romanNumeralToReturn;
 	};
+
+	var convertNumbersBetweenTenAndForty = function( numbersBetweenTenAndForty ) {
+
+		var firstDigit = Math.floor( numbersBetweenTenAndForty/10 );
+		var secondDigit = numbersBetweenTenAndForty % 10;
+		return 'X'.repeat(firstDigit) + convertSingleDigit(secondDigit);
+	};
 	
 	var convertToRoman = function(normalNumber) {
 
@@ -58,9 +65,9 @@ App.converters.RomanNumeralConverter = (function() {
 		if(normalInt < 10) {
 
 			return convertSingleDigit(normalInt);
-		} else if(normalInt < 20) {
-			
-			return "X" + convertSingleDigit(normalInt - 10);
+		} else if(normalInt < 40) {
+
+			return convertNumbersBetweenTenAndForty(normalInt);
 		}
 
 		return romanNumeralToReturn;

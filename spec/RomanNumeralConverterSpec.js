@@ -136,6 +136,43 @@ describe("RomanNumeralConverter", function() {
           var converted = converter.convertToRoman(19);
           expect(converted).toEqual('XIX');
       });
+
+      it("should convert 20 to XX", function() {
+
+          var converted = converter.convertToRoman(20);
+          expect(converted).toEqual('XX');
+      });
+
+      it("should convert 21 to XXI", function() {
+
+          var converted = converter.convertToRoman(21);
+          expect(converted).toEqual('XXI');
+      });
+
+      it("should convert 29 to XXIX", function() {
+
+          var converted = converter.convertToRoman(29);
+          expect(converted).toEqual('XXIX');
+      });
+
+      it("should convert 30 to XXX", function() {
+
+          var converted = converter.convertToRoman(30);
+          expect(converted).toEqual('XXX');
+      });
+
+      it("should convert 31 to XXXI", function() {
+
+          var converted = converter.convertToRoman(31);
+          expect(converted).toEqual('XXXI');
+      });
+
+      it("should convert 39 to XXXIX", function() {
+
+          var converted = converter.convertToRoman(39);
+          expect(converted).toEqual('XXXIX');
+      });
+
   });
 
 });
