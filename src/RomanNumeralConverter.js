@@ -6,19 +6,48 @@ App.converters.RomanNumeralConverter = (function() {
 
 		if( !normalNumber  || Number.isInteger(normalNumber) == false) {
 
-			console.error("Invalid normalNumber.");
-			return normalNumber;
+			console.error("Invalid normalNumber: " + normalNumber);
+			return null;
 		}
 
 		var normalInt = parseInt(normalNumber);
 
-		if(normalInt === 1) {
+		var romanNumeralToReturn = null;
+		switch(normalInt) {
+			case 1 :
+				romanNumeralToReturn = 'I';
+				break;
+			case 2 :
+				romanNumeralToReturn = 'II';
+				break;		
+			case 3 :
+				romanNumeralToReturn = 'III';
+				break;
+			case 4 :
+				romanNumeralToReturn = 'IV';
+				break;
+			case 5 :
+				romanNumeralToReturn = 'V';
+				break;
+			case 6 :
+				romanNumeralToReturn = 'VI';
+				break;
+			case 7 :
+				romanNumeralToReturn = 'VII';
+				break;
+			case 8 :
+				romanNumeralToReturn = 'VIII';
+				break;
+			case 9 :
+				romanNumeralToReturn = 'IX';
+				break;
+			case 10 :
+				romanNumeralToReturn = 'X';
+				break;		
 
-			return "I";
 		}
 
-		console.info("Conversion for " + normalNumber + " has not been implemented yet.");
-		return normalNumber;
+		return romanNumeralToReturn;
 	};
 
 	return {
