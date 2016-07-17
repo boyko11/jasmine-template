@@ -66,6 +66,23 @@ App.converters.RomanNumeralConverter = (function() {
 		var secondDigit = numberBetweenNinetyAndNinetyNine % 10;
 		return 'XC' + convertSingleDigit(secondDigit);
 	};
+
+	var convertNumbersBetween100and399 = function( numberBetween100And399 ) {
+
+		var firstDigit = Math.floor( numberBetween100And399/100 );
+		var secondAndThirdDigitNumber = numberBetween100And399 % 100;
+		return 'C'.repeat(firstDigit) + convertToRoman(secondAndThirdDigitNumber);
+	};
+
+	var convertNumbersBetween400and499 = function( numberBetween400And499 ) {
+
+		return 'CD' + convertToRoman(numberBetween400And499 - 400);
+	};
+
+	var convertNumbersBetween500and899 = function( numberBetween500And899 ) {
+
+		return 'D' + convertToRoman(numberBetween500And899 - 500);
+	};
 	
 	var convertToRoman = function(normalNumber) {
 
@@ -102,6 +119,21 @@ App.converters.RomanNumeralConverter = (function() {
 		if(normalInt < 100) {
 
 			return convertNumbersBetweenNinetyAndNinetyNine(normalInt);
+		}
+
+		if(normalInt < 400) {
+
+			return convertNumbersBetween100and399(normalInt);
+		}
+
+		if(normalInt < 500) {
+
+			return convertNumbersBetween400and499(normalInt);
+		}
+
+		if(normalInt < 900) {
+
+			return convertNumbersBetween500and899(normalInt);
 		}
 
 		return romanNumeralToReturn;

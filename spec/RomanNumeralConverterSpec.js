@@ -300,6 +300,98 @@ describe("RomanNumeralConverter", function() {
           var converted = converter.convertToRoman(99);
           expect(converted).toEqual('XCIX');
       });             
-  });    
+  });
+
+  describe('when converting a number between 100 and 399 inclusive', function() {
+
+      it("should convert 100 to C", function() {
+
+          var converted = converter.convertToRoman(100);
+          expect(converted).toEqual('C');
+      });
+      it("should convert 200 to CC", function() {
+
+          var converted = converter.convertToRoman(200);
+          expect(converted).toEqual('CC');
+      });
+      it("should convert 300 to CCC", function() {
+
+          var converted = converter.convertToRoman(300);
+          expect(converted).toEqual('CCC');
+      });
+      it("should convert 111 to CXI", function() {
+
+          var converted = converter.convertToRoman(111);
+          expect(converted).toEqual('CXI');
+      });
+      it("should convert 257 to CCLVII", function() {
+
+          var converted = converter.convertToRoman(257);
+          expect(converted).toEqual('CCLVII');
+      });
+      it("should convert 399 to CCCXCIX", function() {
+
+          var converted = converter.convertToRoman(399);
+          expect(converted).toEqual('CCCXCIX');
+      });       
+  });
+
+  describe('when converting a number between 400 and 499 inclusive', function() {
+
+      it("should convert 400 to CD", function() {
+
+          var converted = converter.convertToRoman(400);
+          expect(converted).toEqual('CD');
+      });
+      it("should convert 407 to CD", function() {
+
+          var converted = converter.convertToRoman(407);
+          expect(converted).toEqual('CDVII');
+      });
+      it("should convert 451 to CDLI", function() {
+
+          var converted = converter.convertToRoman(451);
+          expect(converted).toEqual('CDLI');
+      });
+      it("should convert 499 to CDXCIX", function() {
+
+          var converted = converter.convertToRoman(499);
+          expect(converted).toEqual('CDXCIX');
+      });       
+  });
+
+  describe('when converting a number between 500 and 899 inclusive', function() {
+
+      it("should convert 500 to D", function() {
+
+          var converted = converter.convertToRoman(500);
+          expect(converted).toEqual('D');
+      });
+      it("should convert 600 to DC", function() {
+
+          var converted = converter.convertToRoman(600);
+          expect(converted).toEqual('DC');
+      });
+      it("should convert 700 to DCC", function() {
+
+          var converted = converter.convertToRoman(700);
+          expect(converted).toEqual('DCC');
+      });
+      it("should convert 800 to DCCC", function() {
+
+          var converted = converter.convertToRoman(800);
+          expect(converted).toEqual('DCCC');
+      });
+      it("should convert 557 to DLVII", function() {
+
+          var converted = converter.convertToRoman(557);
+          expect(converted).toEqual('DLVII');
+      });
+      it("should convert 899 to DCCCXCIX", function() {
+
+          var converted = converter.convertToRoman(899);
+          expect(converted).toEqual('DCCCXCIX');
+      });       
+  }) 
 
 });
