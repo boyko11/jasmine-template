@@ -55,18 +55,23 @@ App.converters.RomanNumeralConverter = (function() {
 		var secondDigit = numberBetweenFortyAndFortyNine % 10;
 		return 'XL' + convertSingleDigit(secondDigit);
 	};
+
+	var convertNumbersBetweenFiftyAndEightyNine = function( numberBetweenFortyAndFortyNine ) {
+
+		return 'L' + convertToRoman( numberBetweenFortyAndFortyNine - 50);
+	};
 	
 	var convertToRoman = function(normalNumber) {
 
 		if( !normalNumber  || Number.isInteger(normalNumber) == false) {
 
 			console.error("Invalid normalNumber: " + normalNumber);
-			return null;
+			return '';
 		}
 
 		var normalInt = parseInt(normalNumber);
 
-		var romanNumeralToReturn = null;
+		var romanNumeralToReturn = '';
 
 		if(normalInt < 10) {
 
@@ -81,6 +86,11 @@ App.converters.RomanNumeralConverter = (function() {
 		if(normalInt < 50) {
 
 			return convertNumbersBetweenFortyAndFortyNine(normalInt);
+		}
+
+		if(normalInt < 90) {
+
+			return convertNumbersBetweenFiftyAndEightyNine(normalInt);
 		}
 
 		return romanNumeralToReturn;

@@ -9,13 +9,13 @@ describe("RomanNumeralConverter", function() {
   it("should not be able to convert Zero", function() {
 
       var converted = converter.convertToRoman(0);
-      expect(converted).toEqual(null);
+      expect(converted).toEqual('');
   });
 
   it("should not be able to convert non-numeric strings", function() {
 
       var converted = converter.convertToRoman("hello");
-      expect(converted).toEqual(null);
+      expect(converted).toEqual('');
   });
 
   describe("when converting a single digit number", function() {
@@ -228,5 +228,59 @@ describe("RomanNumeralConverter", function() {
           expect(converted).toEqual('XLIX');
       });              
   });
+
+  describe('when converting a number between 50 and 89 inclusive', function() {
+
+      it("should convert 50 to L", function() {
+
+          var converted = converter.convertToRoman(50);
+          expect(converted).toEqual('L');
+      });
+      it("should convert 51 to LI", function() {
+
+          var converted = converter.convertToRoman(51);
+          expect(converted).toEqual('LI');
+      });
+      it("should convert 62 to LXII", function() {
+
+          var converted = converter.convertToRoman(62);
+          expect(converted).toEqual('LXII');
+      });
+      it("should convert 73 to LXXIII", function() {
+
+          var converted = converter.convertToRoman(73);
+          expect(converted).toEqual('LXXIII');
+      });
+      it("should convert 89 to LXXXIX", function() {
+
+          var converted = converter.convertToRoman(89);
+          expect(converted).toEqual('LXXXIX');
+      });
+      it("should convert 60 to LX", function() {
+
+          var converted = converter.convertToRoman(60);
+          expect(converted).toEqual('LX');
+      });
+      it("should convert 70 to LXX", function() {
+
+          var converted = converter.convertToRoman(70);
+          expect(converted).toEqual('LXX');
+      });
+      it("should convert 80 to LXXX", function() {
+
+          var converted = converter.convertToRoman(80);
+          expect(converted).toEqual('LXXX');
+      });
+      it("should convert 55 to LV", function() {
+
+          var converted = converter.convertToRoman(55);
+          expect(converted).toEqual('LV');
+      });
+      it("should convert 77 to LXXVII", function() {
+
+          var converted = converter.convertToRoman(77);
+          expect(converted).toEqual('LXXVII');
+      });              
+  });  
 
 });
