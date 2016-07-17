@@ -1,19 +1,16 @@
 var App = App || {};
 App.converters = App.converters || {};
 App.converters.RomanNumeralConverter = (function() {
-	
-	var convertToRoman = function(normalNumber) {
 
-		if( !normalNumber  || Number.isInteger(normalNumber) == false) {
-
-			console.error("Invalid normalNumber: " + normalNumber);
-			return null;
-		}
-
-		var normalInt = parseInt(normalNumber);
+	var convertSingleDigit = function( singleDigitNumber ) {
 
 		var romanNumeralToReturn = null;
-		switch(normalInt) {
+
+		switch( singleDigitNumber ) {
+
+			case 0 :
+				romanNumeralToReturn = '';
+				break;
 			case 1 :
 				romanNumeralToReturn = 'I';
 				break;
@@ -40,11 +37,30 @@ App.converters.RomanNumeralConverter = (function() {
 				break;
 			case 9 :
 				romanNumeralToReturn = 'IX';
-				break;
-			case 10 :
-				romanNumeralToReturn = 'X';
-				break;		
+				break;	
+		}
 
+		return romanNumeralToReturn;
+	};
+	
+	var convertToRoman = function(normalNumber) {
+
+		if( !normalNumber  || Number.isInteger(normalNumber) == false) {
+
+			console.error("Invalid normalNumber: " + normalNumber);
+			return null;
+		}
+
+		var normalInt = parseInt(normalNumber);
+
+		var romanNumeralToReturn = null;
+
+		if(normalInt < 10) {
+
+			return convertSingleDigit(normalInt);
+		} else if(normalInt < 20) {
+			
+			return "X" + convertSingleDigit(normalInt - 10);
 		}
 
 		return romanNumeralToReturn;

@@ -75,4 +75,19 @@ describe("RomanNumeralConverter", function() {
       });       
   });
 
+  describe("when converting a double digit number", function() {
+
+      it("should convert 10 to X", function() {
+
+          var converted = converter.convertToRoman(10);
+          expect(converted).toEqual('X');
+      });
+
+      it("should convert 11 to XI", function() {
+
+          var converted = converter.convertToRoman(11);
+          expect(converted).toEqual('XI');
+      });
+  });
+
 });
