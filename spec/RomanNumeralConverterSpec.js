@@ -75,7 +75,7 @@ describe("RomanNumeralConverter", function() {
       });       
   });
 
-  describe("when converting a double digit number", function() {
+  describe("when converting a number between 10 and 39 inclusive", function() {
 
       it("should convert 10 to X", function() {
 
@@ -172,7 +172,61 @@ describe("RomanNumeralConverter", function() {
           var converted = converter.convertToRoman(39);
           expect(converted).toEqual('XXXIX');
       });
+  });
 
+  describe('when converting a number between 40 and 49 inclusive', function() {
+
+      it("should convert 40 to XL", function() {
+
+          var converted = converter.convertToRoman(40);
+          expect(converted).toEqual('XL');
+      });
+      it("should convert 41 to XLI", function() {
+
+          var converted = converter.convertToRoman(41);
+          expect(converted).toEqual('XLI');
+      });
+      it("should convert 42 to XLII", function() {
+
+          var converted = converter.convertToRoman(42);
+          expect(converted).toEqual('XLII');
+      });
+      it("should convert 43 to XLIII", function() {
+
+          var converted = converter.convertToRoman(43);
+          expect(converted).toEqual('XLIII');
+      });
+      it("should convert 44 to XLIV", function() {
+
+          var converted = converter.convertToRoman(44);
+          expect(converted).toEqual('XLIV');
+      });
+      it("should convert 45 to XLV", function() {
+
+          var converted = converter.convertToRoman(45);
+          expect(converted).toEqual('XLV');
+      });
+
+      it("should convert 46 to XLVI", function() {
+
+          var converted = converter.convertToRoman(46);
+          expect(converted).toEqual('XLVI');
+      });
+      it("should convert 47 to XLVII", function() {
+
+          var converted = converter.convertToRoman(47);
+          expect(converted).toEqual('XLVII');
+      });
+      it("should convert 48 to XLVIII", function() {
+
+          var converted = converter.convertToRoman(48);
+          expect(converted).toEqual('XLVIII');
+      });
+      it("should convert 49 to XLIX", function() {
+
+          var converted = converter.convertToRoman(49);
+          expect(converted).toEqual('XLIX');
+      });              
   });
 
 });

@@ -43,11 +43,17 @@ App.converters.RomanNumeralConverter = (function() {
 		return romanNumeralToReturn;
 	};
 
-	var convertNumbersBetweenTenAndForty = function( numbersBetweenTenAndForty ) {
+	var convertNumbersBetweenTenAndThirtyNine = function( numberBetweenTenAndForty ) {
 
-		var firstDigit = Math.floor( numbersBetweenTenAndForty/10 );
-		var secondDigit = numbersBetweenTenAndForty % 10;
+		var firstDigit = Math.floor( numberBetweenTenAndForty/10 );
+		var secondDigit = numberBetweenTenAndForty % 10;
 		return 'X'.repeat(firstDigit) + convertSingleDigit(secondDigit);
+	};
+
+	var convertNumbersBetweenFortyAndFortyNine = function( numberBetweenFortyAndFortyNine ) {
+
+		var secondDigit = numberBetweenFortyAndFortyNine % 10;
+		return 'XL' + convertSingleDigit(secondDigit);
 	};
 	
 	var convertToRoman = function(normalNumber) {
@@ -65,9 +71,16 @@ App.converters.RomanNumeralConverter = (function() {
 		if(normalInt < 10) {
 
 			return convertSingleDigit(normalInt);
-		} else if(normalInt < 40) {
+		}
 
-			return convertNumbersBetweenTenAndForty(normalInt);
+		if(normalInt < 40) {
+
+			return convertNumbersBetweenTenAndThirtyNine(normalInt);
+		}
+
+		if(normalInt < 50) {
+
+			return convertNumbersBetweenFortyAndFortyNine(normalInt);
 		}
 
 		return romanNumeralToReturn;
