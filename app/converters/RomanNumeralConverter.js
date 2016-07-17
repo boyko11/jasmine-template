@@ -88,6 +88,13 @@ App.converters.RomanNumeralConverter = (function() {
 
 		return 'CM' + convertToRoman( numberBetween900and999 - 900);
 	};
+
+	var convertNumbersBetween1000and4999 = function( numberBetween1000and4999 ) {
+
+		var firstDigit = Math.floor( numberBetween1000and4999/1000 );
+		var secondThirdAndForthDigitNumber = numberBetween1000and4999 % 1000;
+		return 'M'.repeat(firstDigit) + convertToRoman(secondThirdAndForthDigitNumber);
+	};
 	
 	var convertToRoman = function(normalNumber) {
 
