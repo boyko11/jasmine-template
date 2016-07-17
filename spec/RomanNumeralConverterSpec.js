@@ -88,6 +88,54 @@ describe("RomanNumeralConverter", function() {
           var converted = converter.convertToRoman(11);
           expect(converted).toEqual('XI');
       });
+
+      it("should convert 12 to XII", function() {
+
+          var converted = converter.convertToRoman(12);
+          expect(converted).toEqual('XII');
+      });
+
+      it("should convert 13 to XIII", function() {
+
+          var converted = converter.convertToRoman(13);
+          expect(converted).toEqual('XIII');
+      });
+
+      it("should convert 14 to XIV", function() {
+
+          var converted = converter.convertToRoman(14);
+          expect(converted).toEqual('XIV');
+      });
+
+      it("should convert 15 to XV", function() {
+
+          var converted = converter.convertToRoman(15);
+          expect(converted).toEqual('XV');
+      });
+
+      it("should convert 16 to XVI", function() {
+
+          var converted = converter.convertToRoman(16);
+          expect(converted).toEqual('XVI');
+      });      
+
+      it("should convert 17 to XVII", function() {
+
+          var converted = converter.convertToRoman(17);
+          expect(converted).toEqual('XVII');
+      });
+
+      it("should convert 18 to XVIII", function() {
+
+          var converted = converter.convertToRoman(18);
+          expect(converted).toEqual('XVIII');
+      });
+
+      it("should convert 19 to XIX", function() {
+
+          var converted = converter.convertToRoman(19);
+          expect(converted).toEqual('XIX');
+      });
   });
 
 });
