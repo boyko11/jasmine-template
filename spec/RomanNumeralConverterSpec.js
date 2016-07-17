@@ -281,6 +281,25 @@ describe("RomanNumeralConverter", function() {
           var converted = converter.convertToRoman(77);
           expect(converted).toEqual('LXXVII');
       });              
-  });  
+  });
+
+  describe('when converting a number between 90 and 99 inclusive', function() {
+
+      it("should convert 90 to XC", function() {
+
+          var converted = converter.convertToRoman(90);
+          expect(converted).toEqual('XC');
+      });
+      it("should convert 91 to XCI", function() {
+
+          var converted = converter.convertToRoman(91);
+          expect(converted).toEqual('XCI');
+      });
+      it("should convert 99 to XCIX", function() {
+
+          var converted = converter.convertToRoman(99);
+          expect(converted).toEqual('XCIX');
+      });             
+  });    
 
 });

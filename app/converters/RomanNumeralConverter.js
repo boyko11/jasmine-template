@@ -56,9 +56,15 @@ App.converters.RomanNumeralConverter = (function() {
 		return 'XL' + convertSingleDigit(secondDigit);
 	};
 
-	var convertNumbersBetweenFiftyAndEightyNine = function( numberBetweenFortyAndFortyNine ) {
+	var convertNumbersBetweenFiftyAndEightyNine = function( numberBetweenFiftyAndEightyNine ) {
 
-		return 'L' + convertToRoman( numberBetweenFortyAndFortyNine - 50);
+		return 'L' + convertToRoman( numberBetweenFiftyAndEightyNine - 50);
+	};
+
+	var convertNumbersBetweenNinetyAndNinetyNine = function( numberBetweenNinetyAndNinetyNine) {
+
+		var secondDigit = numberBetweenNinetyAndNinetyNine % 10;
+		return 'XC' + convertSingleDigit(secondDigit);
 	};
 	
 	var convertToRoman = function(normalNumber) {
@@ -91,6 +97,11 @@ App.converters.RomanNumeralConverter = (function() {
 		if(normalInt < 90) {
 
 			return convertNumbersBetweenFiftyAndEightyNine(normalInt);
+		}
+
+		if(normalInt < 100) {
+
+			return convertNumbersBetweenNinetyAndNinetyNine(normalInt);
 		}
 
 		return romanNumeralToReturn;
