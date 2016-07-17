@@ -83,6 +83,11 @@ App.converters.RomanNumeralConverter = (function() {
 
 		return 'D' + convertToRoman(numberBetween500And899 - 500);
 	};
+
+	var convertNumbersBetween900and999 = function( numberBetween900and999) {
+
+		return 'CM' + convertToRoman( numberBetween900and999 - 900);
+	};
 	
 	var convertToRoman = function(normalNumber) {
 
@@ -134,6 +139,16 @@ App.converters.RomanNumeralConverter = (function() {
 		if(normalInt < 900) {
 
 			return convertNumbersBetween500and899(normalInt);
+		}
+
+		if(normalInt < 1000) {
+
+			return convertNumbersBetween900and999(normalInt);
+		}
+
+		if(normalInt < 5000) {
+
+			return convertNumbersBetween1000and4999(normalInt);
 		}
 
 		return romanNumeralToReturn;

@@ -392,6 +392,54 @@ describe("RomanNumeralConverter", function() {
           var converted = converter.convertToRoman(899);
           expect(converted).toEqual('DCCCXCIX');
       });       
-  }) 
+  });
+
+  describe('when converting a number between 900 and 999 inclusive', function() {
+
+      it("should convert 900 to CM", function() {
+
+          var converted = converter.convertToRoman(900);
+          expect(converted).toEqual('CM');
+      });
+      it("should convert 907 to CMVII", function() {
+
+          var converted = converter.convertToRoman(907);
+          expect(converted).toEqual('CMVII');
+      });
+      it("should convert 951 to CMLI", function() {
+
+          var converted = converter.convertToRoman(951);
+          expect(converted).toEqual('CMLI');
+      });
+      it("should convert 999 to CMXCIX", function() {
+
+          var converted = converter.convertToRoman(999);
+          expect(converted).toEqual('CMXCIX');
+      });       
+  });
+
+  describe('when converting a number between 1000 and 4999 inclusive', function() {
+
+      it("should convert 1000 to M", function() {
+
+          var converted = converter.convertToRoman(1000);
+          expect(converted).toEqual('M');
+      });
+      it("should convert 2001 to MMI", function() {
+
+          var converted = converter.convertToRoman(2001);
+          expect(converted).toEqual('MMI');
+      });
+      it("should convert 3789 to MMMDCCLXXXIX", function() {
+
+          var converted = converter.convertToRoman(3789);
+          expect(converted).toEqual('MMMDCCLXXXIX');
+      });
+      it("should convert 4999 to MMMMCMXCIX", function() {
+
+          var converted = converter.convertToRoman(4999);
+          expect(converted).toEqual('MMMMCMXCIX');
+      });       
+  });  
 
 });
