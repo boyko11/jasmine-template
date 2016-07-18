@@ -53,6 +53,24 @@ describe("VendingMachine", function() {
 
   });
 
+  describe("when quarter inserted", function() {
+
+    it("should add 25 to the current amount", function() {
+
+        var amountBefore = vendingMachine.getCurrentAmount();
+        vendingMachine.insertCoin(quarter);
+
+        expect(vendingMachine.getCurrentAmount()).toEqual(amountBefore + 25);
+    });
+
+    it("should display 0.25 as the current amount", function() {
+
+        vendingMachine.insertCoin(quarter);
+        expect(vendingMachine.getDisplay()).toEqual('0.25');
+    });    
+
+  });
+
   describe("when RETURN COINS button pushed", function() {
 
       it("should reset the current amount to 0", function() {
