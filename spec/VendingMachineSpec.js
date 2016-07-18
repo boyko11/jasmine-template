@@ -8,7 +8,7 @@ describe("VendingMachine", function() {
 
   it('should display INSERT COIN when no coins inserted', function() {
    
-      expect('INSERT COIN').toEqual(vendingMachine.getDisplay());
+      expect(vendingMachine.getDisplay()).toEqual('INSERT COIN');
   });
 
   describe("when nickel inserted", function() {
@@ -20,8 +20,13 @@ describe("VendingMachine", function() {
 
           vendingMachine.insertCoin(nickel);
 
-          expect(amountBefore + 5).toEqual(vendingMachine.getCurrentAmount());
+          expect(vendingMachine.getCurrentAmount()).toEqual(amountBefore + 5);
       });
+
+      it("should display the current amount", function() {
+
+          expect(vendingMachine.getDisplay()).toEqual('0.05');
+      });      
   });
 
 });

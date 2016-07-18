@@ -3,7 +3,6 @@ App.service = App.service || {};
 App.service.VendingMachine = (function() {
 
 	var currentAmount = 0;
-	var display = 'INSERT COIN'
 	
 	var insertCoin = function(coin) {
 
@@ -18,8 +17,19 @@ App.service.VendingMachine = (function() {
 	};
 
 	var getDisplay = function() {
-
-		return display;
+		
+		if(currentAmount == 0) {
+			return 'INSERT COIN';
+		}
+		if(currentAmount < 10) {
+			return '0.0' + currentAmount.toString();
+		}
+		if(currentAmount < 100) {
+			return '0.' + currentAmount.toString();
+		}
+		var firstDigit = Math.floor(currentAmount / 100);
+		var remainder = currentAmount % 100;
+		return firstDigit.toString() + '.' + remainder.toString();
 	};
 
 	return {
