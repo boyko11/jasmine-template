@@ -8,6 +8,19 @@ App.service.VendingMachine = (function() {
 		{name: 'dime', weight: 2.268, diameter: 0.705, thickness: 1.35, worth: 10},
 		{name: 'quarter', weight: 5.670, diameter: 0.955, thickness: 1.75, worth: 25}
 	];
+	var returnedCoinsHolder = [];
+
+	var returnCoin = function(coin) {
+
+		returnedCoinsHolder.push(coin);
+	};
+
+	var getReturnedCoins = function() {
+
+		var coinsToReturn = returnedCoinsHolder.slice();
+		while (returnedCoinsHolder.length) { returnedCoinsHolder.pop(); }
+		return coinsToReturn;
+	};
 	
 	var insertCoin = function(insertedCoin) {
 
@@ -18,6 +31,8 @@ App.service.VendingMachine = (function() {
 		if(verifiedCoin !== undefined) {
 
 			currentAmount += verifiedCoin.worth;
+		} else {
+			returnCoin(insertedCoin);
 		}
 
 	};
@@ -52,7 +67,8 @@ App.service.VendingMachine = (function() {
 		insertCoin: insertCoin,
 		getCurrentAmount: getCurrentAmount,
 		getDisplay: getDisplay,
-		returnCoins: returnCoins
+		returnCoins: returnCoins,
+		getReturnedCoins: getReturnedCoins
 	}
 
 })();
