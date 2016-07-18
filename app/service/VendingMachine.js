@@ -3,12 +3,23 @@ App.service = App.service || {};
 App.service.VendingMachine = (function() {
 
 	var currentAmount = 0;
+	var validCoinsList = [
+		{name: 'nickel', weight: 5, diameter: 0.835, thickness: 1.95, worth: 5},
+		{name: 'dime', weight: 2.268, diameter: 0.705, thickness: 1.35, worth: 10},
+		{name: 'quarter', weight: 5.670, diameter: 0.955, thickness: 1.75, worth: 25}
+	];
 	
-	var insertCoin = function(coin) {
+	var insertCoin = function(insertedCoin) {
 
-		if(coin.weight === 5 && coin.diameter === 0.835 && coin.thickness === 1.95) {
-			currentAmount += 5;
+		var verifiedCoin = validCoinsList.filter(function ( validCoin ) {
+		    return validCoin.weight === insertedCoin.weight && validCoin.diameter === insertedCoin.diameter && validCoin.thickness === insertedCoin.thickness;
+		})[0];
+
+		if(verifiedCoin !== undefined) {
+
+			currentAmount += verifiedCoin.worth;
 		}
+
 	};
 
 	var getCurrentAmount = function() {
@@ -17,7 +28,7 @@ App.service.VendingMachine = (function() {
 	};
 
 	var getDisplay = function() {
-		
+
 		if(currentAmount == 0) {
 			return 'INSERT COIN';
 		}
