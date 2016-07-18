@@ -9,6 +9,7 @@ describe("VendingMachine", function() {
 
   beforeEach(function() {
     vendingMachine = App.service.VendingMachine;
+    vendingMachine.returnCoins();
   });
 
   it('should display INSERT COIN when no coins inserted', function() {
@@ -27,10 +28,29 @@ describe("VendingMachine", function() {
           expect(vendingMachine.getCurrentAmount()).toEqual(amountBefore + 5);
       });
 
-      it("should display the current amount", function() {
+      it("should display 0.05 as the current amount", function() {
 
+          vendingMachine.insertCoin(nickel);
           expect(vendingMachine.getDisplay()).toEqual('0.05');
       });      
+  });
+
+  describe("when dime inserted", function() {
+
+    it("should add 10 to the current amount", function() {
+
+        var amountBefore = vendingMachine.getCurrentAmount();
+        vendingMachine.insertCoin(dime);
+
+        expect(vendingMachine.getCurrentAmount()).toEqual(amountBefore + 10);
+    });
+
+    it("should display 0.10 as the current amount", function() {
+
+        vendingMachine.insertCoin(dime);
+        expect(vendingMachine.getDisplay()).toEqual('0.10');
+    });    
+
   });
 
   describe("when RETURN COINS button pushed", function() {
@@ -38,14 +58,14 @@ describe("VendingMachine", function() {
       it("should reset the current amount to 0", function() {
 
           vendingMachine.insertCoin(nickel);
-          vendingMachine.returnCoins()
-
+          vendingMachine.returnCoins();
           expect(vendingMachine.getCurrentAmount()).toEqual(0);
       });
 
       it("should reset the display to INSERT COIN", function() {
 
-
+          vendingMachine.insertCoin(dime);
+          vendingMachine.returnCoins();
           expect(vendingMachine.getDisplay()).toEqual('INSERT COIN');
       });      
   });  
