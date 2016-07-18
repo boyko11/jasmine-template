@@ -43,10 +43,16 @@ App.service.VendingMachine = (function() {
 		return firstDigit.toString() + '.' + remainder.toString();
 	};
 
+	var returnCoins = function() {
+
+		currentAmount = 0;
+	};
+
 	return {
 		insertCoin: insertCoin,
 		getCurrentAmount: getCurrentAmount,
-		getDisplay: getDisplay
+		getDisplay: getDisplay,
+		returnCoins: returnCoins
 	}
 
 })();
