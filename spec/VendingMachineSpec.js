@@ -6,6 +6,11 @@ describe("VendingMachine", function() {
     vendingMachine = App.service.VendingMachine;
   });
 
+  it('should display INSERT COIN when no coins inserted', function() {
+   
+      expect('INSERT COIN').toEqual(vendingMachine.getDisplay());
+  });
+
   describe("when nickel inserted", function() {
 
       it("should add five to the current amount", function() {
