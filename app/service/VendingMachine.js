@@ -3,23 +3,39 @@ App.service = App.service || {};
 App.service.VendingMachine = (function() {
 
 	var currentAmount = 0;
+
 	var validCoinsList = [
 		{name: 'nickel', weight: 5, diameter: 0.835, thickness: 1.95, worth: 5},
 		{name: 'dime', weight: 2.268, diameter: 0.705, thickness: 1.35, worth: 10},
 		{name: 'quarter', weight: 5.670, diameter: 0.955, thickness: 1.75, worth: 25}
 	];
+
+	var Products = {
+
+		cola : new App.model.Product('cola', 100),
+		chips : new App.model.Product('chips', 50),
+		candy : new App.model.Product('candy', 65)		
+	};
+
 	var returnedCoinsHolder = [];
+	var dispensedProducts = [];
+	var itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted = [];
 
 	var returnCoin = function(coin) {
 
 		returnedCoinsHolder.push(coin);
 	};
 
+	var returnClonedArrayAndClearOriginalArrayAfterCloning = function( arrayToCloneAndClearAfterCloning ) {
+
+		var arrayToReturn = arrayToCloneAndClearAfterCloning.slice();
+		while (arrayToCloneAndClearAfterCloning.length) { arrayToCloneAndClearAfterCloning.pop(); }
+		return arrayToReturn;
+	}
+
 	var getReturnedCoins = function() {
 
-		var coinsToReturn = returnedCoinsHolder.slice();
-		while (returnedCoinsHolder.length) { returnedCoinsHolder.pop(); }
-		return coinsToReturn;
+		return returnClonedArrayAndClearOriginalArrayAfterCloning(returnedCoinsHolder);
 	};
 	
 	var insertCoin = function(insertedCoin) {
@@ -44,23 +60,76 @@ App.service.VendingMachine = (function() {
 
 	var getDisplay = function() {
 
+		if(dispensedProducts.length > 0) {
+
+			return "THANK YOU";
+		}
+
+		if(itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted.length > 0) {
+
+			var messageToReturn = 'PRICE ' + formatAmount( itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted[0].price );
+			while (itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted.length) { itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted.pop(); }
+			return messageToReturn;
+		}
+
 		if(currentAmount == 0) {
 			return 'INSERT COIN';
 		}
-		if(currentAmount < 10) {
-			return '0.0' + currentAmount.toString();
+
+		return formatAmount( currentAmount );
+	};
+
+	var formatAmount = function( amount ) {
+
+		if(amount < 10) {
+			return '0.0' + amount.toString();
 		}
-		if(currentAmount < 100) {
-			return '0.' + currentAmount.toString();
+		if(amount < 100) {
+			return '0.' + amount.toString();
 		}
-		var firstDigit = Math.floor(currentAmount / 100);
-		var remainder = currentAmount % 100;
-		return firstDigit.toString() + '.' + remainder.toString();
+		var firstDigit = Math.floor(amount / 100);
+		var remainder = amount % 100;
+
+		return firstDigit.toString() + '.' + remainder.toString() + '0';
 	};
 
 	var returnCoins = function() {
 
 		currentAmount = 0;
+		while (itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted.length) { itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted.pop(); }
+	};
+
+	var pushColaButton = function() {
+
+		pushButton(new App.model.Product(Products.cola.name, Products.cola.price));
+	};
+
+	var pushChipsButton = function() {
+
+		pushButton(new App.model.Product(Products.chips.name, Products.chips.price));
+	};
+
+	var pushCandyButton = function() {
+
+		pushButton(new App.model.Product(Products.candy.name, Products.candy.price));
+	};	
+
+	var pushButton = function( productToDispense ) {
+
+		if(currentAmount >= productToDispense.price) {
+
+			dispensedProducts.push( productToDispense );
+			currentAmount = 0;
+			return;
+		}
+
+		itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted.push(productToDispense);
+
+	};
+
+	var getDispensedProducts = function() {
+
+		return returnClonedArrayAndClearOriginalArrayAfterCloning(dispensedProducts);
 	};
 
 	return {
@@ -68,7 +137,12 @@ App.service.VendingMachine = (function() {
 		getCurrentAmount: getCurrentAmount,
 		getDisplay: getDisplay,
 		returnCoins: returnCoins,
-		getReturnedCoins: getReturnedCoins
+		getReturnedCoins: getReturnedCoins,
+		pushColaButton: pushColaButton,
+		pushChipsButton: pushChipsButton,
+		pushCandyButton: pushCandyButton,
+		getDispensedProducts: getDispensedProducts
+
 	}
 
 })();

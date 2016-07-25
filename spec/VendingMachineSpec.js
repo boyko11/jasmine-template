@@ -8,6 +8,36 @@ describe("VendingMachine", function() {
   var quarter = new App.model.Coin('quarter', 5.670, 0.955, 1.75);
   var randomCoin = new App.model.Coin('Canadian quarter', 5.83, 23.88, 1.52);
 
+  var colaProduct = new App.model.Product('cola', 100);
+  var chipsProduct = new App.model.Product('chips', 50);
+  var candyProduct = new App.model.Product('candy', 65);
+
+  var TestHelpers = {
+
+    insertCoinsAndPushButton : function( coins, buttonName ) {
+
+          for(let coin of coins) {
+            vendingMachine.insertCoin(coin);
+          }
+
+          switch( buttonName ) {
+            case 'cola' :
+              vendingMachine.pushColaButton();
+              break;
+            case 'chips' :
+              vendingMachine.pushChipsButton();
+              break;
+            case 'candy' :
+              vendingMachine.pushCandyButton();
+              break;
+            default:
+              break;
+          }
+          
+    }
+
+  }
+
   beforeEach(function() {
     vendingMachine = App.service.VendingMachine;
     vendingMachine.returnCoins();
@@ -130,6 +160,140 @@ describe("VendingMachine", function() {
           vendingMachine.returnCoins();
           expect(vendingMachine.getDisplay()).toEqual('INSERT COIN');
       });      
-  });  
+  });
+
+  describe("when cola button pushed", function() {
+
+      it("should dispense cola when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'cola'); 
+
+          var dispensedProducts = vendingMachine.getDispensedProducts();
+
+          expect(dispensedProducts.length).toEqual(1);
+          expect(dispensedProducts[0].name).toEqual('cola');
+      });
+
+      it("should display 'THANK YOU' followed by displaying 'INSERT COIN' when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'cola');
+
+          var displayMessage = vendingMachine.getDisplay();
+          expect(displayMessage).toEqual('THANK YOU');
+
+          var dispensedProducts = vendingMachine.getDispensedProducts();
+
+          var followingDisplayMessage = vendingMachine.getDisplay();
+          expect(followingDisplayMessage).toEqual('INSERT COIN');
+      });
+
+      it("should set current amount to 0 when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'cola');
+          vendingMachine.getDispensedProducts();
+
+          var currentAmount = vendingMachine.getCurrentAmount();
+          expect(currentAmount).toEqual(0);
+      }); 
+
+      it("should display PRICE + the price of the product when NOT enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([nickel], 'cola');
+          var displayMessage = vendingMachine.getDisplay();
+
+          expect(displayMessage).toEqual('PRICE 1.00');
+      });
+
+      it("should display PRICE + the price of the product when NOT enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([nickel], 'cola');
+          
+          var displayMessage = vendingMachine.getDisplay();
+          expect(displayMessage).toEqual('PRICE 1.00');
+
+          var followingDisplayMessage = vendingMachine.getDisplay();
+          expect(followingDisplayMessage).toEqual('0.05');
+
+          vendingMachine.pushColaButton();
+          var messageAfterAnotherPushWithoutEnoughMoney = vendingMachine.getDisplay();
+          expect(messageAfterAnotherPushWithoutEnoughMoney).toEqual('PRICE 1.00');
+
+      });       
+
+
+  });
+
+  describe("when chips button pushed", function() {
+
+      it("should dispense chips when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'chips');
+
+          var dispensedProducts = vendingMachine.getDispensedProducts();
+
+          expect(dispensedProducts.length).toEqual(1);
+          expect(dispensedProducts[0].name).toEqual('chips');
+      });
+
+      it("should display 'THANK YOU' followed by displaying 'INSERT COIN' when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'chips');
+
+          var displayMessage = vendingMachine.getDisplay();
+          expect(displayMessage).toEqual('THANK YOU');
+
+          var dispensedProducts = vendingMachine.getDispensedProducts();
+
+          var followingDisplayMessage = vendingMachine.getDisplay();
+          expect(followingDisplayMessage).toEqual('INSERT COIN');
+      });
+
+      it("should set current amount to 0 when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'chips');
+          vendingMachine.getDispensedProducts();
+
+          var currentAmount = vendingMachine.getCurrentAmount();
+          expect(currentAmount).toEqual(0);
+      });         
+
+
+  });
+
+  describe("when candy button pushed", function() {
+
+      it("should dispense candy when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'candy');
+
+          var dispensedProducts = vendingMachine.getDispensedProducts();
+
+          expect(dispensedProducts.length).toEqual(1);
+          expect(dispensedProducts[0].name).toEqual('candy');
+      });
+
+      it("should display 'THANK YOU' followed by displaying 'INSERT COIN' when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'candy');
+
+          var displayMessage = vendingMachine.getDisplay();
+          expect(displayMessage).toEqual('THANK YOU');
+
+          var dispensedProducts = vendingMachine.getDispensedProducts();
+
+          var followingDisplayMessage = vendingMachine.getDisplay();
+          expect(followingDisplayMessage).toEqual('INSERT COIN');
+      });       
+
+      it("should set current amount to 0 when enough money", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'chips');
+          vendingMachine.getDispensedProducts();
+
+          var currentAmount = vendingMachine.getCurrentAmount();
+          expect(currentAmount).toEqual(0);
+      });         
+
+  });     
 
 });
