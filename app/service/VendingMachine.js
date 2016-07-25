@@ -141,6 +141,7 @@ App.service.VendingMachine = (function() {
 					returnedChangeAmount + App.service.CoinService.getCoinsNameValueMap().quarter <= changeAmount) {
 					returnedChangeAmount += App.service.CoinService.getCoinsNameValueMap().quarter;
 					returnedCoinsHolder.push(App.service.CoinService.getCoin('quarter'));
+					continue;
 				} else {
 					keepTryingQuarter = false;
 				}
@@ -149,6 +150,7 @@ App.service.VendingMachine = (function() {
 					returnedChangeAmount + App.service.CoinService.getCoinsNameValueMap().dime <= changeAmount) {
 					returnedChangeAmount += App.service.CoinService.getCoinsNameValueMap().dime;
 					returnedCoinsHolder.push(App.service.CoinService.getCoin('dime'));
+					continue;
 				} else {
 					keepTryingDime = false;
 				}
@@ -157,6 +159,7 @@ App.service.VendingMachine = (function() {
 					returnedChangeAmount + App.service.CoinService.getCoinsNameValueMap().nickel <= changeAmount) {
 					returnedChangeAmount += App.service.CoinService.getCoinsNameValueMap().nickel;
 					returnedCoinsHolder.push(App.service.CoinService.getCoin('nickel'));
+					continue;
 				} else {
 					keepTryingNickel = false;
 				}
@@ -165,6 +168,7 @@ App.service.VendingMachine = (function() {
 					returnedChangeAmount + App.service.CoinService.getCoinsNameValueMap().penny <= changeAmount) {
 					returnedChangeAmount += App.service.CoinService.getCoinsNameValueMap().penny;
 					returnedCoinsHolder.push(App.service.CoinService.getCoin('penny'));
+					continue;
 				} else {
 					keepTryingPenny = false;
 				}				
