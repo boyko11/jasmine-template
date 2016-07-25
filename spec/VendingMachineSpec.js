@@ -255,6 +255,16 @@ describe("VendingMachine", function() {
 
           var currentAmount = vendingMachine.getCurrentAmount();
           expect(currentAmount).toEqual(0);
+      });
+
+      it("should return correct change", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'chips');
+          vendingMachine.getDispensedProducts();
+
+          var returnedCoins = vendingMachine.getReturnedCoins();
+          var changeAmount = App.service.CoinService.getCoinsValue(returnedCoins);
+          expect(changeAmount).toEqual(50);
       });         
 
 
@@ -287,12 +297,33 @@ describe("VendingMachine", function() {
 
       it("should set current amount to 0 when enough money", function() {
 
-          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'chips');
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'candy');
           vendingMachine.getDispensedProducts();
 
           var currentAmount = vendingMachine.getCurrentAmount();
           expect(currentAmount).toEqual(0);
-      });         
+      });
+
+      it("should return correct change", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter, quarter], 'candy');
+          vendingMachine.getDispensedProducts();
+          
+          var returnedCoins = vendingMachine.getReturnedCoins();
+          var changeAmount = App.service.CoinService.getCoinsValue(returnedCoins);
+          expect(changeAmount).toEqual(35);
+      });
+
+      it("should return correct change", function() {
+
+          TestHelpers.insertCoinsAndPushButton([quarter, quarter, quarter], 'candy');
+          vendingMachine.getDispensedProducts();
+          
+          var returnedCoins = vendingMachine.getReturnedCoins();
+          var changeAmount = App.service.CoinService.getCoinsValue(returnedCoins);
+          expect(changeAmount).toEqual(10);
+      });       
+
 
   });     
 

@@ -116,12 +116,65 @@ App.service.VendingMachine = (function() {
 
 	var pushButton = function( productToDispense ) {
 
-		if(currentAmount >= productToDispense.price) {
+		if(currentAmount === productToDispense.price) {
 
 			dispensedProducts.push( productToDispense );
 			currentAmount = 0;
 			return;
 		}
+
+		if(currentAmount > productToDispense.price) {
+
+			dispensedProducts.push( productToDispense );
+
+			var changeAmount = currentAmount - productToDispense.price;
+
+			var returnedChangeAmount = 0;
+			var keepTryingQuarter = true;
+			var keepTryingDime = true;
+			var keepTryingNickel = true;
+			var keepTryingPenny = true;
+
+			while(returnedChangeAmount < changeAmount) {
+
+				if(keepTryingQuarter && 
+					returnedChangeAmount + App.service.CoinService.getCoinsNameValueMap().quarter <= changeAmount) {
+					returnedChangeAmount += App.service.CoinService.getCoinsNameValueMap().quarter;
+					returnedCoinsHolder.push(App.service.CoinService.getCoin('quarter'));
+				} else {
+					keepTryingQuarter = false;
+				}
+
+				if(keepTryingDime && 
+					returnedChangeAmount + App.service.CoinService.getCoinsNameValueMap().dime <= changeAmount) {
+					returnedChangeAmount += App.service.CoinService.getCoinsNameValueMap().dime;
+					returnedCoinsHolder.push(App.service.CoinService.getCoin('dime'));
+				} else {
+					keepTryingDime = false;
+				}
+
+				if(keepTryingNickel && 
+					returnedChangeAmount + App.service.CoinService.getCoinsNameValueMap().nickel <= changeAmount) {
+					returnedChangeAmount += App.service.CoinService.getCoinsNameValueMap().nickel;
+					returnedCoinsHolder.push(App.service.CoinService.getCoin('nickel'));
+				} else {
+					keepTryingNickel = false;
+				}
+
+				if(keepTryingPenny && 
+					returnedChangeAmount + App.service.CoinService.getCoinsNameValueMap().penny <= changeAmount) {
+					returnedChangeAmount += App.service.CoinService.getCoinsNameValueMap().penny;
+					returnedCoinsHolder.push(App.service.CoinService.getCoin('penny'));
+				} else {
+					keepTryingPenny = false;
+				}				
+
+			}
+
+			currentAmount = 0;
+			return;
+		}
+
 
 		itemsAttemptedToBeDispensedWithoutEnoughMoneyInserted.push(productToDispense);
 
